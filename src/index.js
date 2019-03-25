@@ -1,19 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-var style = {
-    backgroundColor: 'orange',
-    color: 'white',
-    fontFamily: 'Arial'
+// Classes must always be uppercase!
+class Message extends React.Component {
+    render(){
+        return (
+            <div>
+                <h1 style={{color:this.props.color}}>
+                    {this.props.msg}                
+                </h1>
+                <p>I'll check back in {this.props.minutes} minutes</p>
+            </div>
+        )
+    }
 }
 
-const title = React.createElement(
-    'h1',
-    {id: 'title', className: 'header', style: style},
-    'Hello World'
-)
-
-ReactDOM.render(
-    title,
-    document.getElementById('root')
-)
+ReactDOM.render(<Message color="blue" msg="How are you?" minutes={5} />, 
+document.getElementById('root'))
