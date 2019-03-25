@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
+import PropTypes from 'prop-types'
 
 let bookList = [
-    {"title":"Hunger", "author":"Roxane Gay", pages: 320},
-    {"title":"The Sun Also Rises", "author":"Ernest Hemingway", pages: 260},
-    {"title":"White Teeth", "author":"Zadie Smith", pages: 480},
-    {"title":"Cat's Cradle", "author":"Kurt Vonnegut", pages: 304}
+    {"title":"Hunger", "author":"Roxane Gay","pages":320},
+    {"title":"The Sun Also Rises", "author":"Ernest Hemingway", "pages": 260},
+    {"title":"White Teeth", "author":"Zadie Smith", "pages": 480},
+    {"title":"Cat's Cradle", "author":"Kurt Vonnegut", "pages": 304}
 ]
 
-const Book = ({title, author, pages, freeBookmark}) => {
+const Book = ({title="No title provided", author="No author", pages=0, freeBookmark}) => {
     return (
         <section>
             <h2>{title}</h2>
@@ -30,6 +31,16 @@ const NotHiring = () =>
     </div>
 
 class Library extends React.Component{
+
+    static defaultProps = {
+        books: [
+            {
+                "title": "Tahoe Tales",
+                "author": "Chet Whitley",
+                "pages": 1000
+            }
+        ]
+    }
 
     state = { 
         open: true, 
@@ -91,7 +102,49 @@ class Library extends React.Component{
     }
 }
 
+Library.propTypes= {
+    books: PropTypes.array
+}
+
+Book.propTypes = {
+    title: PropTypes.string,
+    author: PropTypes.string,
+    pages: PropTypes.number,
+    freeBookmark: PropTypes.bool
+}
+
 render(
-    <Library books={bookList} />,
+    <Library books={bookList}/>,
     document.getElementById('root')
 )
+
+// class FavoriteColorForm extends React.Component{
+//     state = { value: '' }
+
+//     newColor = e =>
+//         this.setState({ value: e.target.value })
+
+//     submit = e => {
+//         console.log(`New Color: ${this.state.value}`)
+//         e.preventDefault();
+//     }
+
+//     render(){
+//         return (
+//             <form onSubmit={this.submit}>
+//                 <label>Favorite Color: 
+//                     <input 
+//                         type="color"
+//                         onChange={this.newColor}>
+//                     </input>
+//                     <button>Submit</button>
+//                 </label>
+//             </form>
+//         )
+//     }
+// }
+
+// render(
+//     <FavoriteColorForm />,
+//     document.getElementById('root')
+// )
