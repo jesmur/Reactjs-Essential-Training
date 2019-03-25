@@ -1,43 +1,27 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 
-let skiData = {
-    total: 50,
-    powder: 20,
-    backcountry: 10,
-    goal: 100
-}
-
-const getPercent = decimal => {
-        return decimal * 100 + '%';
-}
-
-const calcGoalProgress = (total, goal) => {
-    return getPercent(total/goal);
-}
-
-const SkiDayCounter = ({total, powder, backcountry, goal}) => {
+const Book = ({title, author, pages}) => {
     return (
         <section>
-            <div>
-                <p>Total Days: {total}</p>
-            </div>
-            <div>
-                <p>Powder Days: {powder}</p>
-            </div>
-            <div>
-                <p>Backcountry Days: {backcountry}</p>
-            </div>
-            <div>
-                <p>Goal Progress: {calcGoalProgress(total,goal)}</p>
-            </div>
+            <h2>{title}</h2>
+            <p>By: {author}</p>
+            <p>Pages: {pages} pages</p>
         </section>
     )
 }
 
-render(<SkiDayCounter
-    total={skiData.total}
-    powder={skiData.powder}
-    backcountry={skiData.backcountry}
-    goal={skiData.goal} />, 
-document.getElementById('root'))
+const Library = () => {
+    return (
+        <div>
+            <Book title="The Sun Also Rises" author="Ernest Hemingway" pages={260} />
+            <Book title="White Teeth" author="Zadie Smith" pages={480} />
+            <Book title="Cat's Cradle" author="Kurt Vonnegut" pages={304} />
+        </div>
+    )
+}
+
+render(
+    <Library />,
+    document.getElementById('root')
+)
